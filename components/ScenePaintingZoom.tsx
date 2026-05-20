@@ -59,72 +59,67 @@ export default function ScenePaintingZoom({ scrollYProgress }: Props) {
       />
 
       <motion.div
-        className="relative z-10 flex items-center gap-10"
+        className="relative z-10 flex items-center gap-[4vw]"
         style={{ opacity: sceneOpacity }}
       >
-        {/* The Painting Frame */}
+        {/* Vertical Painting Frame */}
         <motion.div
           style={{
             opacity: frameOpacity,
             border: "12px solid #1a1a1a",
             boxShadow: "0 0 60px rgba(0,0,0,0.9), inset 0 0 30px rgba(0,0,0,0.6)",
             background: "linear-gradient(135deg, #0a0005 0%, #000000 100%)",
-            padding: "20px",
-            width: "clamp(420px, 52vw, 660px)",
+            padding: "16px",
+            width: "clamp(180px, 22vw, 340px)",
+            height: "clamp(220px, 28vw, 420px)",
           }}
         >
           {/* Inner gold trim */}
-          <div style={{ border: "2px solid #6D001A44", padding: "12px" }}>
-            {/* Logo Grid inside frame */}
+          <div style={{ border: "2px solid #6D001A44", height: "100%", padding: "10px" }}>
+            {/* Logo Grid — 5 rows x 2 cols inside frame */}
             <motion.div
+              className="grid grid-cols-2 gap-2 h-full"
               style={{ opacity: gridOpacity }}
             >
-              <p
-                className="font-space-mono text-[#ffffff] text-center uppercase tracking-widest mb-4"
-                style={{ fontSize: "clamp(0.45rem, 0.75vw, 0.6rem)" }}
-              >
-                Brands That Wanted to Enhanccee
-              </p>
-              <div className="grid grid-cols-5 gap-2">
-                {logos.map((logo, i) => (
-                  <motion.div
-                    key={i}
-                    className="flex flex-col items-center gap-1"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: i * 0.06 }}
+              {logos.map((logo, i) => (
+                <motion.div
+                  key={i}
+                  className="flex flex-col items-center justify-center gap-1"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: i * 0.05 }}
+                >
+                  <div
+                    className="w-full flex items-center justify-center rounded"
+                    style={{
+                      background: "rgba(255,255,255,0.07)",
+                      border: "1px solid rgba(255,255,255,0.08)",
+                      padding: "6px",
+                      height: "clamp(36px, 4vw, 52px)",
+                    }}
                   >
-                    <div
-                      className="w-full flex items-center justify-center rounded border border-[#ffffff11]"
-                      style={{
-                        background: "rgba(255,255,255,0.06)",
-                        padding: "8px",
-                        height: "68px",
-                      }}
-                    >
-                      <img
-                        src={logo.src}
-                        alt={logo.name}
-                        style={{ maxWidth: "100%", maxHeight: "52px", objectFit: "contain" }}
-                      />
-                    </div>
-                    <p
-                      className="font-space-mono text-[#f0c8d4] text-center"
-                      style={{ fontSize: "clamp(0.38rem, 0.55vw, 0.5rem)" }}
-                    >
-                      {logo.name}
-                    </p>
-                  </motion.div>
-                ))}
-              </div>
+                    <img
+                      src={logo.src}
+                      alt={logo.name}
+                      style={{ maxWidth: "100%", maxHeight: "clamp(26px, 3vw, 40px)", objectFit: "contain" }}
+                    />
+                  </div>
+                  <p
+                    className="font-space-mono text-[#f0c8d4] text-center leading-none"
+                    style={{ fontSize: "clamp(0.3rem, 0.45vw, 0.45rem)" }}
+                  >
+                    {logo.name}
+                  </p>
+                </motion.div>
+              ))}
             </motion.div>
           </div>
         </motion.div>
 
-        {/* Right text */}
+        {/* Right text — same as original */}
         <motion.div
-          className="flex flex-col gap-4 max-w-[220px]"
-          style={{ opacity: rightTextOpacity }}
+          className="flex flex-col gap-4"
+          style={{ opacity: rightTextOpacity, maxWidth: "clamp(120px, 18vw, 240px)" }}
         >
           <p
             className="font-cormorant font-semibold text-[#ffffff]"
